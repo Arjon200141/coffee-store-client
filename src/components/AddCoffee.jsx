@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2'
+
 const AddCoffee = () => {
     const handleAddCoffee = e => {
         e.preventDefault();
@@ -9,10 +11,30 @@ const AddCoffee = () => {
         const category = form.category.value;
         const details = form.details.value;
         const photo = form.photo.value;
-        const newCoffee = {name , chef , supplier , taste ,category , details , photo};
+        const newCoffee = { name, chef, supplier, taste, category, details, photo };
         console.log(newCoffee);
         form.reset();
+        fetch('http://localhost:5000/coffee', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newCoffee)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data.insertedId){
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'User Added Successfully!!',
+                        icon: 'success',
+                        confirmButtonText: 'Close'
+                      })
+                }
+            })
     }
+
     return (
         <div className="bg-[#F4F3F0] px-76 font-playfair">
             <h2 className=" py-8 text-5xl font-semibold text-center">Add New Coffee</h2>
@@ -21,35 +43,35 @@ const AddCoffee = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-6">
                     <div className="px-2 font-semibold">
                         <p>Name</p> <br />
-                        <input type="text" name="name" id="" placeholder="Enter coffee name" className="w-full h-10 rounded-md px-8"/> <br />
+                        <input type="text" name="name" id="" placeholder="Enter coffee name" className="w-full h-10 rounded-md px-8" /> <br />
                     </div>
                     <div className="px-2 font-semibold">
                         <p>Chef</p> <br />
-                        <input type="text" name="chef" id="" placeholder="Enter coffee chef" className="w-full h-10 rounded-md px-8"/> <br />
+                        <input type="text" name="chef" id="" placeholder="Enter coffee chef" className="w-full h-10 rounded-md px-8" /> <br />
                     </div>
                     <div className="px-2 font-semibold">
                         <p>Supplier</p> <br />
-                        <input type="text" name="supplier" id="" placeholder="Enter coffee supplier" className="w-full h-10 rounded-md px-8"/> <br />
+                        <input type="text" name="supplier" id="" placeholder="Enter coffee supplier" className="w-full h-10 rounded-md px-8" /> <br />
                     </div>
                     <div className="px-2 font-semibold">
                         <p className="px-2 font-semibold">Taste</p> <br />
-                        <input type="text" name="taste" id="" placeholder="Enter coffee taste" className="w-full h-10 rounded-md px-8"/> <br />
+                        <input type="text" name="taste" id="" placeholder="Enter coffee taste" className="w-full h-10 rounded-md px-8" /> <br />
                     </div>
                     <div className="px-2 font-semibold">
                         <p>Category</p> <br />
-                        <input type="text" name="category" id="" placeholder="Enter coffee category" className="w-full h-10 rounded-md px-8"/> <br />
+                        <input type="text" name="category" id="" placeholder="Enter coffee category" className="w-full h-10 rounded-md px-8" /> <br />
                     </div>
                     <div className="px-2 font-semibold">
                         <p>Details</p> <br />
-                        <input type="text" name="details" id="" placeholder="Enter coffee details" className="w-full h-10 rounded-md px-8"/> <br />
+                        <input type="text" name="details" id="" placeholder="Enter coffee details" className="w-full h-10 rounded-md px-8" /> <br />
                     </div>
                 </div>
                 <div className="mt-4
                 ">
-                        <p className="px-2 font-semibold">Photo</p> <br />
-                        <input type="text" name="photo" id="" placeholder="Enter photo URL" className="w-full h-10 rounded-md px-8"/> <br />
-                    </div>
-                    <input type="submit" value="Add Coffee" className="w-full h-12 rounded-lg my-6 bg-[#D2B48C] font-semibold"/>
+                    <p className="px-2 font-semibold">Photo</p> <br />
+                    <input type="text" name="photo" id="" placeholder="Enter photo URL" className="w-full h-10 rounded-md px-8" /> <br />
+                </div>
+                <input type="submit" value="Add Coffee" className="w-full h-12 rounded-lg my-6 bg-[#D2B48C] font-semibold" />
             </form>
         </div>
     );
