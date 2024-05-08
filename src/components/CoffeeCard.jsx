@@ -1,9 +1,10 @@
 import { CiEdit } from "react-icons/ci";
 import { GrView } from "react-icons/gr";
 import { MdDeleteForever } from "react-icons/md";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees , setCoffees }) => {
     const { _id, name, chef, taste, category, details, photo } = coffee;
 
     const handleDelete = _id => {
@@ -28,11 +29,11 @@ const CoffeeCard = ({ coffee }) => {
                     .then(data => {
                         console.log(data)
                         if (data.deletdCount > 0) {
-                              Swal.fire({
+                            Swal.fire({
                                 title: "Deleted!",
                                 text: "Your coffee has been deleted.",
                                 icon: "success"
-                              });
+                            });
                         }
                     })
             }
@@ -55,7 +56,9 @@ const CoffeeCard = ({ coffee }) => {
                             <div>
                                 <div className="flex flex-col space-y-3 ">
                                     <button className="btn join-item font-bold  text-white rounded-md bg-[#D2B48C]"><GrView /></button>
-                                    <button className="btn join-item font-bold text-white rounded-md bg-[#3C393B]"><CiEdit /></button>
+                                    <Link to={`/updatecoffee/${_id}`}>
+                                        <button className="btn join-item font-bold text-white rounded-md bg-[#3C393B]"><CiEdit /></button>
+                                    </Link>
                                     <button className="btn join-item font-bold text-white rounded-md bg-[#EA4744]" onClick={() => handleDelete(_id)}><MdDeleteForever /></button>
                                 </div>
                             </div>
