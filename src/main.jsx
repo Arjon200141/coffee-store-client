@@ -12,6 +12,7 @@ import App from './App';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import AuthProvider from './components/Providers/AuthProvider';
+import Users from './components/Users/Users';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LogIn></LogIn>
+  },
+  {
+    path:"/user",
+    element:<Users></Users>,
+    loader: () => fetch('http://localhost:5000/user')
   }
 ]);
 
