@@ -42,9 +42,7 @@ const SignUp = () => {
 
     return (
         <div className="font-playfair">
-
             <div className="hero min-h-screen bg-base-200">
-
                 <div>
                     <h2 className="text-4xl font-semibold text-center mb-12">Sign UP Here</h2>
                     <div className="card w-[650px] shrink-0 shadow-2xl bg-base-100">
